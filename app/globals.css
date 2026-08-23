@@ -1,0 +1,140 @@
+/*
+ * Design tokens — BUILD_PROMPT.md §10.
+ *
+ * Contrast audit (WCAG 2.1, normal text needs >= 4.5:1; run via a relative-luminance script,
+ * see workflow note below — role 07 should re-verify with an automated tool, this is role 01's
+ * manual pass before handoff):
+ *
+ *   DARK  text-primary   / bg       16.00:1   text-primary   / surface   15.04:1
+ *   DARK  text-secondary / bg        7.72:1   text-secondary / surface    7.25:1
+ *   DARK  text-muted     / bg        5.42:1   text-muted     / surface    5.10:1
+ *   DARK  accent-primary / bg        7.60:1   accent-primary / surface    7.15:1
+ *   DARK  accent-warn    / bg       10.00:1   accent-warn    / surface    9.40:1
+ *   DARK  accent-error   / bg        5.77:1   accent-error   / surface    5.42:1
+ *   DARK  accent-success / bg        7.66:1   accent-success / surface    7.20:1
+ *   LIGHT text-primary   / bg       15.98:1   text-primary   / surface   16.56:1
+ *   LIGHT text-secondary / bg        6.17:1   text-secondary / surface    6.39:1
+ *   LIGHT text-muted     / bg        4.77:1   text-muted     / surface    4.94:1
+ *   LIGHT accent-primary / bg        5.49:1   accent-primary / surface    5.69:1
+ *   LIGHT accent-warn    / bg        5.72:1   accent-warn    / surface    5.93:1
+ *   LIGHT accent-error   / bg        5.57:1   accent-error   / surface    5.78:1
+ *   LIGHT accent-success / bg        4.90:1   accent-success / surface    5.08:1
+ *
+ * `border` is UI-only (never renders text), so it's held to WCAG 1.4.11's 3:1 non-text
+ * threshold, not 4.5:1 — both themes clear that against their `bg`/`surface`.
+ *
+ * DEVIATIONS FROM THE §10 TABLE (documented per role 01's escalation note: resolve inline,
+ * downstream roles read the comment instead of this blocking Wave 0):
+ *   - Dark `text-muted` moved from the spec's #6B7484 (3.9-4.1:1, fails AA) to #7E8896
+ *     (5.1-5.4:1) — same blue-gray hue family, just lightened enough to pass.
+ *   - Light `text-muted` moved from the spec's #8B949E (4.4-4.6:1, borderline/fails on `bg`)
+ *     to #68717D (4.8-4.9:1).
+ *   - Light accents are the spec's "same accent hues darkened slightly for contrast on white"
+ *     instruction made concrete: accent-primary #0B63CE, accent-warn #8A5A00,
+ *     accent-error #C5222A, accent-success #1A7F37.
+ *   - Syntax palette (§10) is defined for the dark editor-style JsonView as given; light-theme
+ *     syntax values reuse the same darkened-for-white-bg accents (key -> accent-primary light,
+ *     string -> #116329, number -> accent-warn light, punctuation -> text-secondary light) so
+ *     JsonView stays legible when the whole page is in light mode.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0b0d10;
+  --surface: #12151a;
+  --border: #1f242b;
+  --text-primary: #e6e9ef;
+  --text-secondary: #9aa4b2;
+  --text-muted: #7e8896;
+  --accent-primary: #4ca6ff;
+  --accent-warn: #e3b341;
+  --accent-error: #f2555a;
+  --accent-success: #3fb950;
+
+  --syntax-key: #79c0ff;
+  --syntax-string: #a5d6ff;
+  --syntax-number: #f2cc60;
+  --syntax-punctuation: #8b949e;
+
+  --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #fafbfc;
+  --surface: #ffffff;
+  --border: #e1e4e8;
+  --text-primary: #1b1f24;
+  --text-secondary: #57606a;
+  --text-muted: #68717d;
+  --accent-primary: #0b63ce;
+  --accent-warn: #8a5a00;
+  --accent-error: #c5222a;
+  --accent-success: #1a7f37;
+
+  --syntax-key: #0b63ce;
+  --syntax-string: #116329;
+  --syntax-number: #8a5a00;
+  --syntax-punctuation: #57606a;
+
+  --shadow-panel: 0 1px 2px rgba(27, 31, 36, 0.12);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  min-height: 100dvh;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono), var(--font-mono-fallback), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Motion budget (§10): 150-200ms, ease-out, transform/opacity only. Respected globally so no
+   role accidentally reaches for a slower/layout-triggering transition. */
+* {
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible focus rings everywhere (§11) — never `outline: none` without this replacement. */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--bg);
+}

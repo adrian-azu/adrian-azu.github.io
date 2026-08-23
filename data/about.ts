@@ -1,0 +1,5 @@
+// OWNER: 02-content-data.md — do not edit from another role
+// Stub authored in Wave 0 (role 01) only to keep the tree compiling. Role 02 fills this with
+// Adrian's real ~100-140 word bio from Wave 1 onward (§9 — no "passionate about" phrasing).
+
+export const about: string = `Backend engineer with 5+ years building scalable systems across fintech, e-commerce, and web applications. Currently SME and Acting Technical Lead at UBX Philippines (Uniondigital Bank), leading architecture and regulatory initiatives for Deposit Tech on Thought Machine Vault core banking platform. Deep expertise in Node.js, TypeScript, AWS, distributed systems, and performance optimization. Track record of shipping high-throughput batch pipelines (6.7× throughput gains), migrating legacy systems to modern architectures, and mentoring engineers through complex technical challenges. Strong production ownership: on-call incident response, root-cause analysis, and technical leadership across cross-functional teams. Experienced in fintech domain constraints, compliance-driven migrations, and the tradeoffs inherent in financial systems at scale.`;
