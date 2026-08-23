@@ -36,6 +36,7 @@ export const projects: Project[] = [
       { tech: "Express + Socket.io", why: "WebSocket support enables real-time note synchronization and collaboration features without polling" },
       { tech: "MongoDB + Mongoose", why: "Flexible schema for notes and user data; indexed queries for efficient retrieval" },
       { tech: "JWT + bcryptjs", why: "Stateless authentication scales horizontally; bcryptjs provides robust password hashing" },
+      { tech: "AWS EC2 + CodeDeploy", why: "Deployed to an EC2 instance via CodeDeploy lifecycle hooks, with pm2 managing the Node process for zero-downtime restarts" },
     ],
     repoUrl: "https://github.com/adrian-azu/jotter-be",
   },
