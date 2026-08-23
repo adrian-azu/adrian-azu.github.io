@@ -12,13 +12,20 @@ export interface PanelProps {
   as?: ElementType;
 }
 
-export function Panel({ children, className = "", title, as: Tag = "div" }: PanelProps) {
+export function Panel({
+  children,
+  className = "",
+  title,
+  as: Tag = "div",
+}: PanelProps) {
   return (
     <Tag
       className={`rounded-panel border border-border bg-surface p-4 shadow-panel ${className}`.trim()}
     >
       {title ? (
-        <h3 className="mb-2 font-mono text-sm font-medium text-text-secondary">{title}</h3>
+        <h3 className="mb-2 font-mono text-sm font-medium text-text-secondary">
+          {title}
+        </h3>
       ) : null}
       {children}
     </Tag>

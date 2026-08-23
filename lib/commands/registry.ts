@@ -18,6 +18,7 @@ import architecture from "./handlers/architecture";
 import skills from "./handlers/skills";
 import resume from "./handlers/resume";
 import contact from "./handlers/contact";
+import links from "./handlers/links";
 import ls from "./handlers/ls";
 import cat from "./handlers/cat";
 import clear from "./handlers/clear";
@@ -36,6 +37,7 @@ export const registry: Record<string, Command> = {
   skills,
   resume,
   contact,
+  links,
   ls,
   cat,
   clear,

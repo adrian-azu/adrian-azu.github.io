@@ -22,6 +22,7 @@ const ENTRIES: HelpEntry[] = [
   { name: "skills", description: "Renders the Skills section" },
   { name: "resume", description: "Renders a summary + download/print link" },
   { name: "contact", description: "Renders contact methods" },
+  { name: "links", description: "Renders external profile links (GitHub, LinkedIn, ...)" },
   { name: "ls", description: "Lists sections as if they were files" },
   { name: "cat", description: "Alias into the matching section via the `ls` metaphor" },
   { name: "clear", description: "Clears output history" },

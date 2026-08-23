@@ -31,6 +31,7 @@ const SIMPLE_HASH_COMMANDS: Record<string, string> = {
   skills: "/skills",
   resume: "/resume",
   contact: "/contact",
+  links: "/links",
 };
 
 const KNOWN_HASH_COMMANDS = new Set(Object.keys(SIMPLE_HASH_COMMANDS));
@@ -47,6 +48,7 @@ const CHIP_ENTRIES: CommandChipEntry[] = [
   { label: "skills", command: "skills" },
   { label: "resume", command: "resume" },
   { label: "contact", command: "contact" },
+  { label: "links", command: "links" },
   { label: "ls", command: "ls" },
   { label: "cat about.md", command: "cat about.md" },
   { label: "theme dark", command: "theme dark" },

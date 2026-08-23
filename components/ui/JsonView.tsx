@@ -4,7 +4,14 @@
 // #8B949E — wired here as the `--syntax-*` custom properties from app/globals.css so both themes
 // stay legible). Pure token rendering, no `dangerouslySetInnerHTML`.
 
-type TokenKind = "key" | "string" | "number" | "boolean" | "null" | "punctuation" | "whitespace";
+type TokenKind =
+  | "key"
+  | "string"
+  | "number"
+  | "boolean"
+  | "null"
+  | "punctuation"
+  | "whitespace";
 
 interface JsonToken {
   text: string;
@@ -19,7 +26,15 @@ function tokenize(json: string): JsonToken[] {
   let match: RegExpExecArray | null;
   TOKEN_PATTERN.lastIndex = 0;
   while ((match = TOKEN_PATTERN.exec(json)) !== null) {
-    const [text, stringToken, boolToken, nullToken, numberToken, punctToken, wsToken] = match;
+    const [
+      text,
+      stringToken,
+      boolToken,
+      nullToken,
+      numberToken,
+      punctToken,
+      wsToken,
+    ] = match;
     let kind: TokenKind;
     if (stringToken !== undefined) {
       kind = /:\s*$/.test(stringToken) ? "key" : "string";
@@ -62,7 +77,9 @@ export function JsonView({ data, className = "", indent = 2 }: JsonViewProps) {
   const tokens = tokenize(json);
 
   return (
-    <pre className={`overflow-x-auto rounded-panel bg-bg p-3 font-mono text-xs leading-relaxed ${className}`.trim()}>
+    <pre
+      className={`overflow-x-auto rounded-panel bg-bg p-3 font-mono text-xs leading-relaxed ${className}`.trim()}
+    >
       <code>
         {tokens.map((token, i) => {
           const cls = KIND_CLASS[token.kind];

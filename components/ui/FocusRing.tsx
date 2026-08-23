@@ -12,7 +12,11 @@ export interface FocusRingProps {
   rounded?: boolean;
 }
 
-export function FocusRing({ children, className = "", rounded = true }: FocusRingProps) {
+export function FocusRing({
+  children,
+  className = "",
+  rounded = true,
+}: FocusRingProps) {
   const classes = [
     "inline-block",
     "focus-within:outline",

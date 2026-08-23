@@ -21,7 +21,13 @@ export interface TabsProps {
   "aria-label"?: string;
 }
 
-export function Tabs({ tabs, activeId, onChange, className = "", ...rest }: TabsProps) {
+export function Tabs({
+  tabs,
+  activeId,
+  onChange,
+  className = "",
+  ...rest
+}: TabsProps) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   function focusTab(index: number) {
@@ -29,7 +35,10 @@ export function Tabs({ tabs, activeId, onChange, className = "", ...rest }: Tabs
     el?.focus();
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+  function handleKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
     if (tabs.length === 0) return;
     switch (event.key) {
       case "ArrowRight": {
@@ -77,7 +86,11 @@ export function Tabs({ tabs, activeId, onChange, className = "", ...rest }: Tabs
   }
 
   return (
-    <div role="tablist" aria-label={rest["aria-label"]} className={`flex gap-1 border-b border-border ${className}`.trim()}>
+    <div
+      role="tablist"
+      aria-label={rest["aria-label"]}
+      className={`flex gap-1 border-b border-border ${className}`.trim()}
+    >
       {tabs.map((tab, index) => {
         const selected = tab.id === activeId;
         return (
